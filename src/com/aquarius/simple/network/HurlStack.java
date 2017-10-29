@@ -23,7 +23,7 @@ import java.util.Map;
  */
 public class HurlStack implements HttpStack {
 
-    private static final String HEADER_CONTENT_TYPE = "Content=Type";
+    private static final String HEADER_CONTENT_TYPE = "Content-Type";
 
     private final SSLSocketFactory mSslSocketFactory;
 
@@ -45,7 +45,7 @@ public class HurlStack implements HttpStack {
 
         URL parsedUrl = new URL(url);
         HttpURLConnection conn = openConnection(request, parsedUrl);
-        // 添加请求头部信息到HttpUrlConntion中
+        // 添加请求头部信息到HttpUrlConnection中
         for (String headName : map.keySet()) {
             conn.addRequestProperty(headName, map.get(headName));
         }

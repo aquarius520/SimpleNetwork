@@ -1,9 +1,11 @@
 package com.aquarius.simple.network;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.params.HttpConnectionParams;
@@ -62,6 +64,11 @@ public class HttpClientStack implements HttpStack {
                 HttpPost postRequest = new HttpPost(request.getUrl());
                 postRequest.addHeader(HEADER_CONTENT_TYPE, request.getBodyContentType());
                 setEntityIfNonEmptyBody(request, postRequest);
+
+                // ------------------- for  proxy ---------------------
+//                HttpHost httpHost = new HttpHost("192.168.97.122", 8888);
+//                RequestConfig config = RequestConfig.custom().setProxy(httpHost).build();
+//                postRequest.setConfig(config);
                 return postRequest;
 
             case Request.Method.DELETE:
