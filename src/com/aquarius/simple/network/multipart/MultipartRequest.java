@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by aquarius on 2017/10/30.
  */
-public class MultipartRequest extends Request implements MultipartUpload{
+public class MultiPartRequest extends Request implements MultipartUpload{
 
     /* To hold the parameter name and the File to upload */
     private Map<String,File> fileUploads = new LinkedHashMap<String,File>();
@@ -18,7 +18,7 @@ public class MultipartRequest extends Request implements MultipartUpload{
     /* To hold the parameter name and the string content to upload */
     private Map<String,String> stringUploads = new LinkedHashMap<String,String>();
 
-    public MultipartRequest(int method, String url) {
+    public MultiPartRequest(int method, String url) {
         super(method, url);
     }
 

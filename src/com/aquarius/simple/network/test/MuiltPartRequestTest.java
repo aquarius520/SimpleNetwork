@@ -1,7 +1,7 @@
 package com.aquarius.simple.network.test;
 
 import com.aquarius.simple.network.Request;
-import com.aquarius.simple.network.multipart.MultipartRequest;
+import com.aquarius.simple.network.multipart.MultiPartRequest;
 
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -15,7 +15,7 @@ public class MuiltPartRequestTest {
 
         String host = "http://www.chuantu.biz";
 
-        MultipartRequest multipartRequest = new MultipartRequest(Request.Method.POST, host ) {
+        MultiPartRequest multiPartRequest = new MultiPartRequest(Request.Method.POST, host ) {
             @Override
             public Map<String, File> getFileUploads() {
                 return getFilesOfDir("d:\\upload-image-for-test");

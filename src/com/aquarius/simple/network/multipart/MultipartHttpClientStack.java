@@ -104,7 +104,7 @@ public class MultipartHttpClientStack implements HttpStack {
     }
 
     private void setMultiPartBody(HttpEntityEnclosingRequestBase httpRequest, Request request) {
-        if (!(request instanceof MultipartRequest)) {
+        if (!(request instanceof MultiPartRequest)) {
             byte[] body = request.getBody();
             if (body != null) {
                 HttpEntity entity = new ByteArrayEntity(body);
@@ -116,14 +116,14 @@ public class MultipartHttpClientStack implements HttpStack {
 
             ContentType contentType = ContentType.create(HTTP.PLAIN_TEXT_TYPE, HTTP.UTF_8);
             // string upload
-            Map<String, String> stringUpload = ((MultipartRequest) request).getStringUploads();
+            Map<String, String> stringUpload = ((MultiPartRequest) request).getStringUploads();
             for (Map.Entry<String, String> entry : stringUpload.entrySet()) {
                 builder.addPart(( entry.getKey()),
                         new StringBody(entry.getValue(), contentType));
             }
 
             // for file upload
-            Map<String, File> fileUpload = ((MultipartRequest)request).getFileUploads();
+            Map<String, File> fileUpload = ((MultiPartRequest)request).getFileUploads();
             for (Map.Entry<String, File> entry : fileUpload.entrySet()) {
                 builder.addPart(entry.getKey(), new FileBody(entry.getValue()));
             }
