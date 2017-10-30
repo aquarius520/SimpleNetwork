@@ -21,8 +21,6 @@ public class HttpClientStack implements HttpStack {
 
     private HttpClient mHttpClient;
 
-    private static final String HEADER_CONTENT_TYPE = "Content-Type";
-
     public HttpClientStack(HttpClient client) {
         this.mHttpClient = client;
     }
@@ -51,7 +49,7 @@ public class HttpClientStack implements HttpStack {
                     return new HttpGet(request.getUrl());
                 } else {
                     HttpPost httpPostRequest = new HttpPost(request.getUrl());
-                    httpPostRequest.addHeader(HEADER_CONTENT_TYPE, request.getBodyContentType());
+                    httpPostRequest.addHeader(Constant.Header.HEADER_CONTENT_TYPE, request.getBodyContentType());
                     HttpEntity entity = new ByteArrayEntity(postBody);
                     httpPostRequest.setEntity(entity);
                     return httpPostRequest;
@@ -62,7 +60,7 @@ public class HttpClientStack implements HttpStack {
 
             case Request.Method.POST:
                 HttpPost postRequest = new HttpPost(request.getUrl());
-                postRequest.addHeader(HEADER_CONTENT_TYPE, request.getBodyContentType());
+                postRequest.addHeader(Constant.Header.HEADER_CONTENT_TYPE, request.getBodyContentType());
                 setEntityIfNonEmptyBody(request, postRequest);
 
                 // ------------------- for  proxy ---------------------
@@ -76,7 +74,7 @@ public class HttpClientStack implements HttpStack {
 
             case Request.Method.PUT:
                 HttpPut httpPutRequest = new HttpPut(request.getUrl());
-                httpPutRequest.addHeader(HEADER_CONTENT_TYPE, request.getBodyContentType());
+                httpPutRequest.addHeader(Constant.Header.HEADER_CONTENT_TYPE, request.getBodyContentType());
                 setEntityIfNonEmptyBody(request, httpPutRequest);
                 return httpPutRequest;
 
@@ -91,7 +89,7 @@ public class HttpClientStack implements HttpStack {
 
             case Request.Method.PATCH:
                 HttpPatch patchRequest = new HttpPatch(request.getUrl());
-                patchRequest.addHeader(HEADER_CONTENT_TYPE, request.getBodyContentType());
+                patchRequest.addHeader(Constant.Header.HEADER_CONTENT_TYPE, request.getBodyContentType());
                 setEntityIfNonEmptyBody(request, patchRequest);
                 return patchRequest;
 

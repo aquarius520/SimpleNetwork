@@ -5,6 +5,10 @@ package com.aquarius.simple.network;
  */
 public class Constant {
 
+    public interface Header {
+        public static final String HEADER_CONTENT_TYPE = "Content-Type";
+    }
+
     public interface MIMETYPE {
         public static final String IMAGE_PNG = "image/png";
         public static final String IMAGE_JPG = "image/jpeg";

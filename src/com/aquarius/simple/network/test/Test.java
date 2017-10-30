@@ -5,6 +5,7 @@ import com.aquarius.simple.network.Error;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 /**
@@ -12,18 +13,17 @@ import java.util.*;
  */
 public class Test {
 
-    // http://www.cnblogs.com/sphere
     public static void main(String[] argv) throws Error, InterruptedException{
 
-//        Request request = new Request(Request.Method.GET, "http://www.kuaidi100.com/query");
-//        request.setTimeOutMs(4000)
-//                .setRetryPolicy(new DefaultRetryPolicy())
-//                .setHeaders(fillHeaders())
-//                .setParams(fillParams())
-//                .setParamEncoding("UTF-8");
+        Request stringRequest = new Request(Request.Method.GET, "http://www.kuaidi100.com/query");
+        stringRequest.setTimeOutMs(4000)
+                .setRetryPolicy(new DefaultRetryPolicy())
+                .setHeaders(fillHeaders())
+                .setParams(fillParams())
+                .setParamEncoding("UTF-8");
 
-        System.setProperty("http.proxyHost", "192.168.97.122");
-        System.setProperty("https.proxyHost", "192.168.97.122");
+        System.setProperty("http.proxyHost", "192.168.97.104");
+        System.setProperty("https.proxyHost", "192.168.97.104");
         System.setProperty("http.proxyPort", "8888");
         System.setProperty("https.proxyPort", "8888");
 
@@ -59,7 +59,11 @@ public class Test {
         System.out.println("statusCode="+response.statusCode);
         System.out.println("notModified="+response.notModified);
         printHeaderInfo(response.headers);
-        System.out.println(new String(response.data));
+        try {
+            System.out.println(new String(response.data, "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -91,6 +95,7 @@ public class Test {
 //        Referer: http://www.chuantu.biz/
 //        Accept-Encoding: gzip, deflate
 //        Accept-Language: zh-CN,zh;q=0.8
+
     private static Map<String, String> fillUploadImageHeaders() {
         Map<String, String> params = new LinkedHashMap<>();
         params.put("Host", "www.chuantu.biz");
@@ -101,7 +106,7 @@ public class Test {
         params.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
         params.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
         params.put("Referer", "http://www.chuantu.biz");
-        params.put("Accept-Encoding", "gzip,deflate");
+        //params.put("Accept-Encoding", "gzip,deflate");
         params.put("Accept-Language", "zh-CN,zh;q=0.8");
         return params;
     }
@@ -116,7 +121,6 @@ public class Test {
             }
         }
         return list;
-
     }
 
     private static void printHeaderInfo(Map<String, String> header) {

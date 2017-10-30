@@ -23,8 +23,6 @@ import java.util.Map;
  */
 public class HurlStack implements HttpStack {
 
-    private static final String HEADER_CONTENT_TYPE = "Content-Type";
-
     private final SSLSocketFactory mSslSocketFactory;
 
     public HurlStack() {
@@ -131,7 +129,7 @@ public class HurlStack implements HttpStack {
                     // output stream.
                     connection.setDoOutput(true);
                     connection.setRequestMethod("POST");
-                    connection.addRequestProperty(HEADER_CONTENT_TYPE, request.getBodyContentType());
+                    connection.addRequestProperty(Constant.Header.HEADER_CONTENT_TYPE, request.getBodyContentType());
                     DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
                     dos.write(postBody);
                     dos.close();
@@ -184,7 +182,7 @@ public class HurlStack implements HttpStack {
         byte[] body = request.getBody();
         if (body != null) {
             connection.setDoOutput(true);
-            connection.addRequestProperty(HEADER_CONTENT_TYPE, request.getBodyContentType());
+            connection.addRequestProperty(Constant.Header.HEADER_CONTENT_TYPE, request.getBodyContentType());
             DataOutputStream out = new DataOutputStream(connection.getOutputStream());
             out.write(body);
             out.close();
